@@ -31,7 +31,6 @@ const Home = () => {
 
     if (pasteId) {
       // updating
-
       existingPastes.map((p) => (p._id === pasteId ? paste : p));
     } else {
       //creating

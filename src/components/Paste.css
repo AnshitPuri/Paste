@@ -1,0 +1,41 @@
+.mainBox{
+    width: min(90vw , 1200px);
+    border: 1px solid rgb(216, 212, 212);
+    border-radius: 5px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.container input{
+    height: 40px;
+    padding: 10px;
+    border: 1px solid rgb(216, 212, 212);
+    color: rgb(163, 162, 160);
+    border-radius: 5px;
+}
+.mainBox h1{
+    margin: 20px;
+}
+.pasteBox{
+    margin: 20px;
+    border: 1px solid rgb(216, 212, 212);
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+    height: 100px;
+}
+.infoArea {
+    max-width: 70%;
+}
+.infoArea h4{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.infoArea p{
+    color: rgb(182, 181, 180);
+    font-size: smaller;
+}
