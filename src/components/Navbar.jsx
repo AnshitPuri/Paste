@@ -1,22 +1,25 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
-import "./Navbar.css"
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
     <div className="main">
       <nav className="navArea">
+        <div class="glow-orb"></div>
         <NavLink
-        to="/"
+          to="/"
+          className={({ isActive }) => (isActive ? "navLink-active" : "")}
         >
-            Home
+          Home
         </NavLink>
         <NavLink
-        to={"/pastes"}
+          to={"/pastes"}
+          className={({ isActive }) => (isActive ? "navLink-active" : "")}
         >
-            Paste
+          Paste
         </NavLink>
       </nav>
-      <Outlet /> 
+      <Outlet />
     </div>
   );
 };

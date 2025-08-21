@@ -14,11 +14,10 @@ const Home = () => {
   const notify = () => toast("Paste Added");
 
   useEffect(() => {
-    if(pasteId){
+    if (pasteId) {
       const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
-      
     }
-  })
+  });
 
   const createPaste = () => {
     const paste = {
@@ -54,32 +53,39 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <input
-        className="bg-black"
-        type="text"
-        placeholder="Enter Title Here"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          createPaste();
-          notify();
-        }}
-      >
-        {pasteId ? "Update Paste" : "Create My Paste"}
-      </button>
-      <button onClick={show}>Show</button>
-      <div>
-        <textarea
-          value={value}
-          placeholder="Enter Content Here"
-          onChange={(e) => setValue(e.target.value)}
-          rows={20}
-        />
+    <div className="main">
+      <div className="home-conatiner">
+        <div className="titleSpace">
+          <input
+            className="bg-black"
+            type="text"
+            placeholder="Enter Title Here"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              createPaste();
+              notify();
+            }}
+          >
+            {pasteId ? "Update Paste" : "Create My Paste"}
+          </button>
+          <button onClick={show}>Show</button>
+        </div>
+        <div className="contentBox">
+          <div className="utilbox">
+            
+          </div>
+            <textarea className="textArea"
+              value={value}
+              placeholder="Write Content Here..."
+              onChange={(e) => setValue(e.target.value)}
+              rows={20}
+            />
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };
