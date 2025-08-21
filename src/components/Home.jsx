@@ -66,7 +66,6 @@ const Home = () => {
           rows={20}
         />
       </div>
-      <ToastContainer/>
     </div>
   );
 };
