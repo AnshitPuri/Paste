@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Home.css";
 import { useParams, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +12,13 @@ const Home = () => {
   const pasteId = serachParams.get("pasteId");
 
   const notify = () => toast("Paste Added");
+
+  useEffect(() => {
+    if(pasteId){
+      const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
+      
+    }
+  })
 
   const createPaste = () => {
     const paste = {
@@ -23,11 +32,13 @@ const Home = () => {
 
     if (pasteId) {
       // updating
+
+      existingPastes.map((p) => (p._id === pasteId ? paste : p));
     } else {
       //creating
       existingPastes.push(paste);
-      localStorage.setItem("pastes", JSON.stringify(existingPastes));
     }
+    localStorage.setItem("pastes", JSON.stringify(existingPastes));
 
     setTitle("");
     setValue("");
@@ -51,10 +62,12 @@ const Home = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button onClick={() => {
-        createPaste();
-        notify();
-      }}>
+      <button
+        onClick={() => {
+          createPaste();
+          notify();
+        }}
+      >
         {pasteId ? "Update Paste" : "Create My Paste"}
       </button>
       <button onClick={show}>Show</button>
@@ -66,6 +79,7 @@ const Home = () => {
           rows={20}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };
