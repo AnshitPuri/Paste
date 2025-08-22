@@ -66,9 +66,9 @@
 .titleSpace button:active {
   transform: translateY(0);
 }
-.titleSpace button a{
+
+.titleSpace button a {
   text-decoration: none;
-  background-color: transparent;
   color: white;
 }
 
@@ -82,7 +82,6 @@
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  min-height: 0; 
 }
 
 .contentBox:hover {
@@ -98,32 +97,23 @@
   display: flex;
   align-items: center;
   padding: 0 20px;
-  box-sizing: border-box;
-  flex-direction: row;
   justify-content: space-between;
 }
-.util1{
+
+.util1 {
   display: flex;
   gap: 10px;
 }
-.red{
+
+.red, .green, .yellow {
   height: 20px;
   width: 20px;
-  background-color: #f71a1a;
-  border-radius: 20px;
+  border-radius: 50%;
 }
-.green{
-  height: 20px;
-  width: 20px;
-  background-color: #2dc943;
-  border-radius: 20px;
-}
-.yellow{
-  height: 20px;
-  width: 20px;
-  background-color: #ffbf39;
-  border-radius: 20px;
-}
+
+.red { background-color: #f71a1a; }
+.green { background-color: #2dc943; }
+.yellow { background-color: #ffbf39; }
 
 .textArea {
   flex: 1;
@@ -135,7 +125,6 @@
   outline: none;
   resize: none;
   line-height: 1.5;
-  min-height: 0;
   box-sizing: border-box;
 }
 
@@ -144,63 +133,17 @@
 }
 
 @media (max-width: 768px) {
-  .home-container {
-    width: 95vw;
-    gap: 25px;
-    height: 100vh;
-  }
-
-  .titleSpace {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .titleSpace input {
-    width: 100%;
-    height: min(55px, 12vh);
-    font-size: clamp(14px, 3vw, 17px);
-  }
-
-  .titleSpace button {
-    width: 100%;
-    max-width: 250px;
-    align-self: center;
-    height: min(50px, 12vh);
-    font-size: clamp(13px, 2.5vw, 16px);
-  }
-
-  .contentBox {
-    width: 100%;
-  }
+  .home-container { gap: 25px; }
+  .titleSpace { flex-direction: column; align-items: stretch; }
+  .titleSpace input { width: 100%; height: min(55px, 12vh); font-size: clamp(14px, 3vw, 17px); }
+  .titleSpace button { width: 100%; max-width: 250px; align-self: center; height: min(50px, 12vh); }
+  .contentBox { width: 100%; }
 }
 
 @media (max-width: 480px) {
-  .home-container {
-    width: 100vw;
-    padding: 10px;
-    gap: 20px;
-    height: 100vh;
-  }
-
-  .titleSpace input {
-    width: 100%;
-    height: min(50px, 12vh);
-    padding: 10px 12px;
-    font-size: clamp(14px, 4.5vw, 17px);
-  }
-
-  .titleSpace button {
-    height: min(48px, 12vh);
-    font-size: clamp(13px, 4vw, 16px);
-    width: 100%;
-  }
-
-  .textArea {
-    padding: 14px;
-    font-size: clamp(13px, 4vw, 16px);
-  }
-
-  .utilbox {
-    padding: 0 12px;
-  }
-} 
+  .home-container { padding: 10px; gap: 20px; }
+  .titleSpace input { padding: 10px 12px; height: min(50px, 12vh); font-size: clamp(14px, 4.5vw, 17px); }
+  .titleSpace button { height: min(48px, 12vh); font-size: clamp(13px, 4vw, 16px); }
+  .textArea { padding: 14px; font-size: clamp(13px, 4vw, 16px); }
+  .utilbox { padding: 0 12px; }
+}
