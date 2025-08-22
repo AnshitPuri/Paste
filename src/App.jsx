@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Paste from "./components/Paste";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ function App() {
   return (
     <div className="main">
       <RouterProvider router={router} />
+    
     </div>
   );
 }

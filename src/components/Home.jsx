@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import "./Home.css";
-import { useParams, useSearchParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { href, useParams, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const mode = searchParams.get("mode")
+  const mode = searchParams.get("mode");
   const pasteId = searchParams.get("pasteId");
 
-  const notify = () => toast("Paste Added");
   const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
 
   useEffect(() => {
     if (pasteId) {
-
       const currentPaste = pastes.find((pastes) => pastes._id === pasteId);
 
       if (currentPaste) {
@@ -25,7 +24,7 @@ const Home = () => {
         setValue(currentPaste.content);
       }
     }
-  },[pasteId]);
+  }, [pasteId]);
 
   const createPaste = () => {
     const paste = {
@@ -35,12 +34,14 @@ const Home = () => {
       createdAt: new Date().toISOString(),
     };
 
-    const existingPastes = pastes
+    const existingPastes = pastes;
 
     if (pasteId) {
       // updating
 
-      const updatedPaste = existingPastes.map((p) => (p._id === pasteId ? paste : p));
+      const updatedPaste = existingPastes.map((p) =>
+        p._id === pasteId ? paste : p
+      );
       localStorage.setItem("pastes", JSON.stringify(updatedPaste));
 
     } else {
@@ -53,7 +54,7 @@ const Home = () => {
     setValue("");
     setSearchParams({});
   };
-  
+
   // const show = () => {
   //   const savedPastes = pastes
   //   if (savedPastes && savedPastes.length > 0) {
@@ -75,23 +76,34 @@ const Home = () => {
             onChange={(e) => setTitle(e.target.value)}
             disabled={mode === "view"}
           />
-          {mode === "view" ? (
-            null
-          ) : <button
-            onClick={() => {
-              createPaste();
-              notify();
-            }}
-          >
-            {pasteId ? "Update Paste" : "Create My Paste"}
-          </button> }
-         
-          <button>
-            <a href="/pastes" > Show </a>
-          </button>
+          {mode === "view" ? null : (
+            <button
+              onClick={() => {
+                createPaste();
+                toast.success("Paste Added");
+              }}
+            >
+              {pasteId ? "Update Paste" : "Create My Paste"}
+            </button>
+          )}
+
         </div>
         <div className="contentBox">
-          <div className="utilbox"></div>
+          <div className="utilbox">
+            <div className="util1">
+              <div className="red"></div>
+              <div className="yellow"></div>
+              <div className="green"></div>
+            </div>
+            <div className="util2">
+              <button className="button" onClick={() => {
+                navigator.clipboard.writeText(value);
+                toast.success("Copied to clipboard");
+              }}>
+                <FontAwesomeIcon icon={faCopy} className="icons" />
+              </button>
+            </div>
+          </div>
           <textarea
             className="textArea"
             value={value}
@@ -101,7 +113,6 @@ const Home = () => {
             disabled={mode === "view"}
           />
         </div>
-        <ToastContainer />
       </div>
     </div>
   );

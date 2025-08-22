@@ -8,7 +8,6 @@ import {
   faEye,
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Paste = () => {
@@ -32,12 +31,12 @@ const Paste = () => {
   return (
     <div className="container">
       <input
+      id="inputBox"
         type="text"
         placeholder="Search Paste Here..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
       <div className="mainBox">
         <h1> All Pastes </h1>
         <hr />
@@ -72,12 +71,16 @@ const Paste = () => {
                       <FontAwesomeIcon icon={faEye} className="icons" />
                     </a>
 
-                    <button className="button">
-                      <a href="/">
-                        <FontAwesomeIcon icon={faCopy} className="icons" />
-                      </a>
+                    <button
+                      className="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(paste.content);
+                        toast.success("Copied to clipboard");
+                        console.log("Fired")
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faCopy} className="icons" />
                     </button>
-                    
                   </div>
                   <small>
                     <FontAwesomeIcon icon={faCalendar} />{" "}

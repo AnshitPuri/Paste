@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 35px;
-  height: 100vh; /* lock height within viewport */
-  width: min(95vw, 1200px); /* large width but keeps margin outside */
+  height: 100vh;
+  width: min(95vw, 1200px);
   margin: 0 auto;
   padding: 20px 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,14 +14,13 @@
   align-items: center;
 }
 
-/* Title section */
 .titleSpace {
   display: flex;
   gap: 20px;
   align-items: center;
   margin-bottom: 10px;
   flex-wrap: wrap;
-  width: min(90vw, 1400px); /* same as contentBox */
+  width: min(90vw, 1400px);
 }
 
 .titleSpace input {
@@ -73,7 +72,6 @@
   color: white;
 }
 
-/* Content box */
 .contentBox {
   flex: 1;
   width: min(90vw, 1400px);
@@ -86,7 +84,6 @@
   flex-direction: column;
   min-height: 0; 
 }
-
 
 .contentBox:hover {
   border-color: #cbd5e1;
@@ -102,6 +99,30 @@
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.util1{
+  display: flex;
+  gap: 10px;
+}
+.red{
+  height: 20px;
+  width: 20px;
+  background-color: #f71a1a;
+  border-radius: 20px;
+}
+.green{
+  height: 20px;
+  width: 20px;
+  background-color: #2dc943;
+  border-radius: 20px;
+}
+.yellow{
+  height: 20px;
+  width: 20px;
+  background-color: #ffbf39;
+  border-radius: 20px;
 }
 
 .textArea {
@@ -122,7 +143,6 @@
   color: #9ca3af;
 }
 
-/* Tablet */
 @media (max-width: 768px) {
   .home-container {
     width: 95vw;
@@ -154,7 +174,6 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
   .home-container {
     width: 100vw;
@@ -184,4 +203,4 @@
   .utilbox {
     padding: 0 12px;
   }
-}
+} 
