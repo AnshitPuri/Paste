@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
-import { href, useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
@@ -9,22 +9,26 @@ import { toast } from "react-toastify";
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
+  const [pastes , setPastes] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const mode = searchParams.get("mode");
   const pasteId = searchParams.get("pasteId");
 
-  const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
-
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("pastes")) || [];
+    setPastes(saved)
+  }, []);
+  
   useEffect(() => {
     if (pasteId) {
-      const currentPaste = pastes.find((pastes) => pastes._id === pasteId);
+      const currentPaste = pastes.find((paste) => paste._id === pasteId);
 
       if (currentPaste) {
         setTitle(currentPaste.title);
         setValue(currentPaste.content);
       }
     }
-  }, [pasteId]);
+  }, [pasteId , pastes]);
 
   const createPaste = () => {
     const paste = {

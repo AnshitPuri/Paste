@@ -3,6 +3,8 @@
     border: 1px solid #d8d4d4;
     border-radius: 5px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -90,7 +92,12 @@
 .buttonArea small {
     align-self: flex-end;
 }
-
+.errorMsg{
+    font-size: 24px;
+    margin: 20px;
+    align-self: center;
+    font-weight: bold;
+}
 /* Tablet */
 @media screen and (max-width: 768px) {
     .mainBox {

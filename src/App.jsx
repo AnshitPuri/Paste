@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Paste from "./components/Paste";
 import "react-toastify/dist/ReactToastify.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <Navbar/>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="main">
       <RouterProvider router={router} />
-    
+      <Analytics/>
     </div>
   );
 }

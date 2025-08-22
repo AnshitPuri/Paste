@@ -19,19 +19,24 @@ const Paste = () => {
     setPastes(savedPastes);
   }, []);
 
+  const filteredData = !searchTerm.trim() 
+  ? pastes
+  : pastes.filter((paste) => 
+    paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   const handleDelete = (id) => {
     const remainingPastes = pastes.filter((pastes) => pastes._id !== id);
     setPastes(remainingPastes);
 
-    if (pastes.length > 0) {
       localStorage.setItem("pastes", JSON.stringify(remainingPastes));
-    }
+
   };
 
   return (
     <div className="container">
       <input
-      id="inputBox"
+        id="inputBox"
         type="text"
         placeholder="Search Paste Here..."
         value={searchTerm}
@@ -40,8 +45,8 @@ const Paste = () => {
       <div className="mainBox">
         <h1> All Pastes </h1>
         <hr />
-        {pastes.length > 0 ? (
-          pastes.map((paste) => (
+        {filteredData.length > 0 ? (
+          filteredData.map((paste) => (
             <div className="pasteArea">
               <div key={paste._id} className="pasteBox">
                 <div className="infoArea">
@@ -59,7 +64,10 @@ const Paste = () => {
 
                     <button
                       className="button"
-                      onClick={() => handleDelete(paste._id)}
+                      onClick={() => {
+                        handleDelete(paste._id);
+                        toast.success("Deleted");
+                      }}
                     >
                       <FontAwesomeIcon icon={faTrash} className="icons" />
                     </button>
@@ -76,7 +84,7 @@ const Paste = () => {
                       onClick={() => {
                         navigator.clipboard.writeText(paste.content);
                         toast.success("Copied to clipboard");
-                        console.log("Fired")
+                        console.log("Fired");
                       }}
                     >
                       <FontAwesomeIcon icon={faCopy} className="icons" />
@@ -95,7 +103,7 @@ const Paste = () => {
             </div>
           ))
         ) : (
-          <p> No Pastes Available </p>
+          <p className="errorMsg"> No Data Found </p>
         )}
       </div>
     </div>
