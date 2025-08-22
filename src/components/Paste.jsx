@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Paste.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPen,
+  faCopy,
+  faTrash,
+  faEye,
+  faCalendar
+} from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 
 const Paste = () => {
   const [pastes, setPastes] = useState([]);
@@ -28,17 +37,42 @@ const Paste = () => {
               <div key={paste._id} className="pasteBox">
                 <div className="infoArea">
                   <h4>{paste.title}</h4>
-                <p> {paste.content}</p>
+                  <p> {paste.content}</p>
                 </div>
                 <div className="buttonArea">
+                  <div className="fontArea">
+                    <button className="button">
+                      <a href={`/?pasteId=${paste?._id}`}>
+                        <FontAwesomeIcon icon={faPen} className="icons" />
+                      </a>
+                    </button>
+
+                    <button  className="button">
+                      <a href="/">
+                        <FontAwesomeIcon icon={faTrash} className="icons" />
+                      </a>
+                    </button>
+                    <button className="button">
+                      <a href="/">
+                        <FontAwesomeIcon icon={faEye} className="icons" />
+                      </a>
+                    </button>
+
+                    <button className="button">
+                      <a href="/">
+                        <FontAwesomeIcon icon={faCopy} className="icons" />
+                      </a>
+                    </button>
+                  </div>
                   <small>
-                  {" "}
-                  {new Date(paste.createdAt).toLocaleString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric"
-                  })}
-                </small>
+                    <FontAwesomeIcon icon={faCalendar} />
+                    {" "}
+                    {new Date(paste.createdAt).toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </small>
                 </div>
               </div>
             </div>
