@@ -6,18 +6,28 @@ import {
   faCopy,
   faTrash,
   faEye,
-  faCalendar
+  faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Paste = () => {
   const [pastes, setPastes] = useState([]);
-  const [searchTerm, setSeatchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const savedPastes = JSON.parse(localStorage.getItem("pastes")) || [];
     setPastes(savedPastes);
   }, []);
+
+  const handleDelete = (id) => {
+    const remainingPastes = pastes.filter((pastes) => pastes._id !== id);
+    setPastes(remainingPastes);
+
+    if (pastes.length > 0) {
+      localStorage.setItem("pastes", JSON.stringify(remainingPastes));
+    }
+  };
 
   return (
     <div className="container">
@@ -25,7 +35,7 @@ const Paste = () => {
         type="text"
         placeholder="Search Paste Here..."
         value={searchTerm}
-        onChange={(e) => setSeatchTerm(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
 
       <div className="mainBox">
@@ -41,32 +51,36 @@ const Paste = () => {
                 </div>
                 <div className="buttonArea">
                   <div className="fontArea">
-                    <button className="button">
-                      <a href={`/?pasteId=${paste?._id}`}>
-                        <FontAwesomeIcon icon={faPen} className="icons" />
-                      </a>
+                    <a
+                      href={`/?mode=edit&pasteId=${paste?._id}`}
+                      className="button"
+                    >
+                      <FontAwesomeIcon icon={faPen} className="icons" />
+                    </a>
+
+                    <button
+                      className="button"
+                      onClick={() => handleDelete(paste._id)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} className="icons" />
                     </button>
 
-                    <button  className="button">
-                      <a href="/">
-                        <FontAwesomeIcon icon={faTrash} className="icons" />
-                      </a>
-                    </button>
-                    <button className="button">
-                      <a href="/">
-                        <FontAwesomeIcon icon={faEye} className="icons" />
-                      </a>
-                    </button>
+                    <a
+                      href={`/?mode=view&pasteId=${paste._id}`}
+                      className="button"
+                    >
+                      <FontAwesomeIcon icon={faEye} className="icons" />
+                    </a>
 
                     <button className="button">
                       <a href="/">
                         <FontAwesomeIcon icon={faCopy} className="icons" />
                       </a>
                     </button>
+                    
                   </div>
                   <small>
-                    <FontAwesomeIcon icon={faCalendar} />
-                    {" "}
+                    <FontAwesomeIcon icon={faCalendar} />{" "}
                     {new Date(paste.createdAt).toLocaleString("en-US", {
                       month: "short",
                       day: "numeric",

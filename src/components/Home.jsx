@@ -5,20 +5,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
-
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
-  const [serachParams, setSearchParams] = useSearchParams();
-  const pasteId = serachParams.get("pasteId");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const mode = searchParams.get("mode")
+  const pasteId = searchParams.get("pasteId");
 
   const notify = () => toast("Paste Added");
+  const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
 
   useEffect(() => {
     if (pasteId) {
-      const pastes = JSON.parse(localStorage.getItem("pastes")) || [];
+
+      const currentPaste = pastes.find((pastes) => pastes._id === pasteId);
+
+      if (currentPaste) {
+        setTitle(currentPaste.title);
+        setValue(currentPaste.content);
+      }
     }
-  });
+  },[pasteId]);
 
   const createPaste = () => {
     const paste = {
@@ -28,29 +35,33 @@ const Home = () => {
       createdAt: new Date().toISOString(),
     };
 
-    const existingPastes = JSON.parse(localStorage.getItem("pastes")) || [];
+    const existingPastes = pastes
 
     if (pasteId) {
       // updating
-      existingPastes.map((p) => (p._id === pasteId ? paste : p));
+
+      const updatedPaste = existingPastes.map((p) => (p._id === pasteId ? paste : p));
+      localStorage.setItem("pastes", JSON.stringify(updatedPaste));
+
     } else {
       //creating
       existingPastes.push(paste);
+      localStorage.setItem("pastes", JSON.stringify(existingPastes));
     }
-    localStorage.setItem("pastes", JSON.stringify(existingPastes));
 
     setTitle("");
     setValue("");
     setSearchParams({});
   };
-  const show = () => {
-    const savedPastes = JSON.parse(localStorage.getItem("pastes"));
-    if (savedPastes && savedPastes.length > 0) {
-      console.log(savedPastes);
-    } else {
-      console.log("No paste found in localStorage");
-    }
-  };
+  
+  // const show = () => {
+  //   const savedPastes = pastes
+  //   if (savedPastes && savedPastes.length > 0) {
+  //     console.log(savedPastes);
+  //   } else {
+  //     console.log("No paste found in localStorage");
+  //   }
+  // };
 
   return (
     <div className="main">
@@ -62,27 +73,33 @@ const Home = () => {
             placeholder="Enter Title Here"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            disabled={mode === "view"}
           />
-          <button
+          {mode === "view" ? (
+            null
+          ) : <button
             onClick={() => {
               createPaste();
               notify();
             }}
           >
             {pasteId ? "Update Paste" : "Create My Paste"}
+          </button> }
+         
+          <button>
+            <a href="/pastes" > Show </a>
           </button>
-          <button onClick={show}>Show</button>
         </div>
         <div className="contentBox">
-          <div className="utilbox">
-            
-          </div>
-            <textarea className="textArea"
-              value={value}
-              placeholder="Write Content Here..."
-              onChange={(e) => setValue(e.target.value)}
-              rows={20}
-            />
+          <div className="utilbox"></div>
+          <textarea
+            className="textArea"
+            value={value}
+            placeholder="Write Content Here..."
+            onChange={(e) => setValue(e.target.value)}
+            rows={20}
+            disabled={mode === "view"}
+          />
         </div>
         <ToastContainer />
       </div>

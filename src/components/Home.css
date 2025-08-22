@@ -67,6 +67,11 @@
 .titleSpace button:active {
   transform: translateY(0);
 }
+.titleSpace button a{
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+}
 
 /* Content box */
 .contentBox {

@@ -4,24 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Paste from "./components/Paste";
-import ViewPaste from "./components/ViewPaste";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar />,
+    element: <Navbar/>,
     children: [
       {
-        index: true,
+        path: "/",
         element: <Home />,
       },
       {
         path: "pastes",
         element: <Paste />,
-      },
-      {
-        path: "pastes/:id",
-        element: <ViewPaste />,
       },
     ],
   },
