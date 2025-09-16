@@ -80,6 +80,12 @@
     }
 }
 
+.newbtn a{
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+}
+
 .button {
     padding: 0.5rem;
     background-color: white;

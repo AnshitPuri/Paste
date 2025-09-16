@@ -44,7 +44,8 @@ const Paste = () => {
       <button 
       className="newbtn"
       >
-        Create New Paste
+        <a href={`PasteEditor`}
+        > Create New Paste </a>
       </button>
       <div className="mainBox">
         <h1> All Pastes </h1>
@@ -60,7 +61,7 @@ const Paste = () => {
                 <div className="buttonArea">
                   <div className="fontArea">
                     <a
-                      href={`/?mode=edit&pasteId=${paste?._id}`}
+                      href={`PasteEditor/?mode=edit&pasteId=${paste?._id}`}
                       className="button"
                     >
                       <FontAwesomeIcon icon={faPen} className="icons" />
@@ -77,7 +78,7 @@ const Paste = () => {
                     </button>
 
                     <a
-                      href={`/?mode=view&pasteId=${paste._id}`}
+                      href={`PasteEditor/?mode=view&pasteId=${paste._id}`}
                       className="button"
                     >
                       <FontAwesomeIcon icon={faEye} className="icons" />
