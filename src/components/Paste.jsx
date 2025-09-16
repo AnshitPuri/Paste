@@ -19,18 +19,17 @@ const Paste = () => {
     setPastes(savedPastes);
   }, []);
 
-  const filteredData = !searchTerm.trim() 
-  ? pastes
-  : pastes.filter((paste) => 
-    paste.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredData = !searchTerm.trim()
+    ? pastes
+    : pastes.filter((paste) =>
+        paste.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
   const handleDelete = (id) => {
     const remainingPastes = pastes.filter((pastes) => pastes._id !== id);
     setPastes(remainingPastes);
 
-      localStorage.setItem("pastes", JSON.stringify(remainingPastes));
-
+    localStorage.setItem("pastes", JSON.stringify(remainingPastes));
   };
 
   return (
@@ -42,6 +41,11 @@ const Paste = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <button 
+      className="newbtn"
+      >
+        Create New Paste
+      </button>
       <div className="mainBox">
         <h1> All Pastes </h1>
         <hr />

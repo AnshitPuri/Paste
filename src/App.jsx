@@ -2,10 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import PasteEditor from "./components/PasteEditor";
 import Paste from "./components/Paste";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react";
+import Home from "./components/Home";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Home/>
+      },
+      {
+        path: "PasteEditor",
+        element: <PasteEditor />,
       },
       {
         path: "pastes",

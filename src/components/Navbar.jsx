@@ -6,19 +6,29 @@ const Navbar = () => {
   return (
     <div className="main">
       <nav className="navArea">
-        <div className="glow-orb"></div>
-        <NavLink
-          to="/"
+        <div className="logoArea">
+          <h1>Paste</h1>
+        </div>
+        <div className="nav-links">
+          <NavLink
+          to={"/"}
           className={({ isActive }) => (isActive ? "navLink-active" : "")}
         >
           Home
+        </NavLink>
+          <NavLink
+          to={"/PasteEditor"}
+          className={({ isActive }) => (isActive ? "navLink-active" : "")}
+        >
+          + New Paste
         </NavLink>
         <NavLink
           to={"/pastes"}
           className={({ isActive }) => (isActive ? "navLink-active" : "")}
         >
-          Paste
+          All Pastes
         </NavLink>
+        </div>
       </nav>
       <Outlet />
       <ToastContainer
