@@ -65,7 +65,7 @@
 .newbtn{
     background-color: #2562ea;
     height: 50px;
-    width: min(300px,25%);
+    width: min(300px,50%);
     align-self: center;
     color: white;
     font-weight: bolder;
