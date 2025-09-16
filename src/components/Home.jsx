@@ -15,20 +15,21 @@ const Home = () => {
         </p>
       </div>
       <div className="animationArea">
-        <div className="animations animation1">
-          <div className="animationTitle1"></div>
-          <div className="animationSection"></div>
-          <div className="animationSection animationSection1"></div>
-          <div className="animationSection animationSection2"></div>
-        </div>
 
-        <div className="animations animation2 ">
-          <div className="animationTitle2"></div>
-          <div className="animationSection"></div>
-          <div className="animationSection animationSection1"></div>
-          <div className="animationSection animationSection2"></div>
-          <div className="animationSection animationSection3"></div>
+          <div className="animations animation1">
+            <div className="animationTitle1"></div>
+            <div className="animationSection"></div>
+            <div className="animationSection animationSection1"></div>
+            <div className="animationSection animationSection2"></div>
+          </div>
 
+          <div className="animations animation2 ">
+            <div className="animationTitle2"></div>
+            <div className="animationSection"></div>
+            <div className="animationSection animationSection1"></div>
+            <div className="animationSection animationSection2"></div>
+            <div className="animationSection animationSection3"></div>
+            
         </div>
       </div>
     </div>
